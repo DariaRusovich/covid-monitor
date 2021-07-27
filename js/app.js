@@ -1,8 +1,8 @@
 
-async function getData(url) {
-  const response= await fetch(url)
-  const DATA = await response.json()
-  console.log(DATA.ukraine);
+async function getResponse() {
+  const response = await fetch('https://api-covid19.rnbo.gov.ua/data?to=2021-07-23')
+  const data = await response.json()
+  console.log(data.ukraine);
+  console.log(data);
 }
-
-getData('https://api-covid19.rnbo.gov.ua/data?to=2021-07-23')
+getResponse()

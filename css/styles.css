@@ -180,7 +180,6 @@ button {
 /*===========COMMON STYLES END============*/
 /*===========HEADER STYLES START============*/
 
-    
 .main-title {
   font-size: 32px;
   text-align: center;
@@ -194,9 +193,7 @@ button {
   align-items: flex-start;
   justify-content: center;
   border-top: 1px solid #2e313a;
-
 }
- 
 
 .tab-item {
   cursor: pointer;
@@ -212,33 +209,64 @@ button {
   margin-left: 10px;
 }
 
-.active{
-    background-color: #292b33;
+.active {
+  background-color: #292b33;
 }
-.totall-info{
-    padding: 10px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    color: #c6c7c7;
+.totall-info {
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #c6c7c7;
 }
-.info-item{
-display: flex;
-flex-direction: column;
-align-items: flex-start;
+.info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
-.count{
-    font-size: 26px;
+.count {
+  font-size: 26px;
 }
-.confirmed{
-    color: #ffc538;
+.confirmed {
+  color: #ffc538;
 }
-.deaths{
-    color: #fafafa;
+.deaths {
+  color: #fafafa;
 }
-.recovered{
-   color: #00ba80; 
+.recovered {
+  color: #00ba80;
 }
-.existing{
-    color: #f25454;
+.existing {
+  color: #f25454;
+}
+
+.search-form {
+  width: 50%;
+  padding: 16px 0;
+}
+.search-input {
+  width: 100%;
+  padding: 8px 16px;
+  background-color: #292b33;
+  border: 1px solid #2e313a;
+  border-radius: 2px;
+}
+.table{
+  width: 100%;
+}
+.data-table {
+  display: flex;
+  padding: 1rem 0;
+  border-bottom: 1px solid #2e313a;
+}
+.data-table>span{
+  justify-self: flex-start;
+}
+.data-info{
+  display: flex;
+  justify-content: flex-end;
+  gap: 100px;
+}
+.data-info tr, .data-info th{
+  padding: 0 20px;
 }
