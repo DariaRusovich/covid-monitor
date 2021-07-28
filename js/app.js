@@ -1,60 +1,87 @@
-//let data = []
+// const formEl = document.getElementById('form')
+// const rateEl = document.getElementById('rate')
 
-async function getResponse() {
-  const response = await fetch(
-    "https://api-covid19.rnbo.gov.ua/data?to=2021-07-23"
-  );
-  let data = await response.json();
-  let dataUA = data.ukraine;
-  console.log(dataUA); //Array
-  console.log(data); //Object
-  //  let key;
-  //  for (key in data){
-  //   console.log(data[key]);
-  //  }
-  renderTableRow(createTableRow(dataUA), rowList);
-}
 
-//renderTableRow(tableRowHtml, data)
+// formEl.addEventListener('submit', async e => {
+//     e.preventDefault()
+//     const num = +e.target.num.value
+//     const [savedNums, savedNumsError] = await addNum(num)
+//     if (!savedNumsError) {
+//         console.log(`Success! Updated nums array is ${savedNums}`);
+//     } else{
+//         console.warn(`Num is not saved! Error is ${savedNumsError}`);
+//     }
+// })
+// renderRate(rateEl)
 
-const rowList = document.getElementById("rowList");
-getResponse();
+// async function renderRate(rateElem) {
+//     const [rate, rateError] = await getUSDRate()
+//    if (!rateError) {
+//     rateElem.innerHTML = `USD rate is ${rate.sale}`
+//    } else{
+//     rateElem.innerHTML = `Error request rates from bank!`
+//    }
+// }
 
-// confirmed: 71341
-// country: 4907
-// deaths: 1699
-// delta_confirmed: 8
-// delta_deaths: 0
-// delta_existing: -9
-// delta_recovered: 17
-// delta_suspicion: 0
-// existing: 194
-// id: 105
-// label: Object { en: "Vinnytsia", uk: "Вінницька область" }
-// lat: 48.920517
-// lng: 28.685484
-// recovered: 69448
-// suspicion: 59638
-function createTableRow(dataArray) {
-  let tableRowHtml = "";
-  dataArray.forEach((rowElem) => {
-    tableRowHtml += getTableData(rowElem);
-  });
-  return tableRowHtml;
-}
+// const obj = {
 
-function renderTableRow(tableRowHtml, data) {
-  data.innerHTML = tableRowHtml;
-}
+//     x: 10,
+    
+//     y: 20
+    
+//     }
+    
+//     const prop =
+//     Object
+    
+//     .keys (obj)
+    
+//     .reverse()
+    
+//     .join('')
+    
+//     obj.xy
+//     = 30
+    
+//     obj.yx = 40
+    
+//     obj.x10y20 = 50
+    
+//     obj.y20x10 = 60
+    
+//     const result = obj[prop]
+    
+//     console.log(result); // ?
+const obj = {
 
-function getTableData(tableData) {
-  return ` 
-  <td class="region">${tableData.label.en}</td>
-  <tr>
-  <td class="confirmed"> ${tableData.confirmed} </td>
-  <td class="deaths">${tableData.deaths}</td>
-  <td class="recovered">${tableData.recovered}</td>
-  <td class="existing">${tableData.existing}</td>
-  </tr>
-`;
-}
+    x: 10,
+    
+    y: 20,
+    
+    Z: 30
+    
+    }
+    
+    // 1
+    
+    // const result =
+    // obj.values()
+    
+    // 2
+    
+    const result = Object.values (obj)
+    
+    // // 3
+    
+    // const result =
+    // Object.values (obj, 'x', 'y', 'z')
+    
+    // // 4
+    
+    // const result = obj.values ('x',
+    // obj.values ('x', 'y', 'z')
+    
+    console.log(result); // [10, 20, 30]
+     
+    
+    
