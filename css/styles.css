@@ -229,6 +229,7 @@ button {
 }
 .confirmed {
   color: #ffc538;
+  padding: 15px 0;
 }
 .deaths {
   color: #fafafa;
@@ -241,6 +242,7 @@ button {
 }
 .region{
   color:#999fb2;
+  text-align: left;
 }
 .search-form {
   width: 50%;
@@ -256,19 +258,13 @@ button {
 .table{
   width: 100%;
 }
-.data-table {
-  display: flex;
-  padding: 1rem 0;
+.row-table, .data-info{
   border-bottom: 1px solid #2e313a;
-  justify-content: space-between;
 }
+
 .data-info{
-  display: flex;
-  justify-content: space-between;
-  gap: 100px;
-  width: 100%;
+  text-align: left;
 }
-.rows{
-  display: flex;
-  flex-wrap: wrap;
+.data-info th{
+  padding: 15px 0;
 }
