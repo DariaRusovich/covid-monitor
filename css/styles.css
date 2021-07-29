@@ -229,7 +229,6 @@ button {
 }
 .confirmed {
   color: #ffc538;
-  padding: 15px 0;
 }
 .deaths {
   color: #fafafa;
@@ -258,13 +257,13 @@ button {
 .table{
   width: 100%;
 }
-.row-table, .data-info{
+.data-info th, .data-table td{
   border-bottom: 1px solid #2e313a;
 }
 
 .data-info{
   text-align: left;
 }
-.data-info th{
+.data-info th, .data-table td{
   padding: 15px 0;
 }

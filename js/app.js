@@ -46,14 +46,13 @@ async function getResponse() {
   }
   
   function getTableData(tableData) {
-    return ` 
-    <td class="region">${tableData.label.en}</td>
-    <tr>
-    <td class="confirmed"> ${tableData.confirmed} </td>
-    <td class="deaths">${tableData.deaths}</td>
-    <td class="recovered">${tableData.recovered}</td>
-    <td class="existing">${tableData.existing}</td>
-    </tr>
+    return ` <tr>
+<td class="region">${tableData.label.en}</td>
+<td class="confirmed"> ${tableData.confirmed} </td>
+<td class="deaths">${tableData.deaths}</td>
+<td class="recovered">${tableData.recovered}</td>
+<td class="existing">${tableData.existing}</td></tr>
+
   `;
   }
     
