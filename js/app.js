@@ -2,14 +2,15 @@ async function getResponse() {
     const response = await fetch(
       "https://api-covid19.rnbo.gov.ua/data?to=2021-07-23"
     );
-    let data = await response.json();
+    
+    let data = []
+    data = await response.json(); 
     let dataUA = data.ukraine;
     console.log(dataUA); //Array
     console.log(data); //Object
-    //  let key;
-    //  for (key in data){
-    //   console.log(data[key]);
-    //  }
+    
+    
+
     renderTableRow(createTableRow(dataUA), rowList);
   }
   
@@ -18,6 +19,8 @@ async function getResponse() {
   const rowList = document.getElementById("rowList");
   getResponse();
   
+
+
   // confirmed: 71341
   // country: 4907
   // deaths: 1699
