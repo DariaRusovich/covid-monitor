@@ -6,43 +6,67 @@ async function getResponse() {
     "https://api-covid19.rnbo.gov.ua/data?to=2021-07-23"
   );
   let data = await response.json();
-    
   console.log(data); //Object
+
 
   const confirmed = data.ukraine.map((key) => {
     return key.confirmed;
   });
   console.log(confirmed);
+
+
   renderTableRow(createTableRow(data.ukraine), rowList);
-}
 
-
-
-tabs.addEventListener("click", (event) => {
-  //console.log(event.target);
-  const tab = event.target.closest(".tab-item");
-  tab.classList.remove('none-active')
-  tab.classList.add('active')
+  const tabUA = document.getElementById('tabUA')
+  const tabWorld = document.getElementById('tabWorld')
+  tabUA.addEventListener('click', e => {
+    async function getResponse() {
+      const response = await fetch(
+        "https://api-covid19.rnbo.gov.ua/data?to=2021-07-23"
+      );
+      let data = await response.json();
+      renderTableRow(createTableRow(data.ukraine), rowList);
+    }
+    
+    getResponse()
+  })
+  tabWorld.addEventListener('click', e => {
+    async function getResponse() {
+      const response = await fetch(
+        "https://api-covid19.rnbo.gov.ua/data?to=2021-07-23"
+      );
+      let data = await response.json();
+      renderTableRow(createTableRow(data.world), rowList);
+    }
+    
+    getResponse()
+  })
  
-  if (tab) {
-    const tabSiblings = findSiblings(tab)
-    tabSiblings.forEach(tabSibling => {
-      tabSibling.classList.remove('active')
-      tabSibling.classList.add('none-active')
-    })
-    //console.log(tabSiblings);
-   
-  }
-
-  
-  //console.log(tab);
-});
-
-
+}
 
 const rowList = document.getElementById("rowList");
 getResponse();
 
+tabs.addEventListener("click", (event) => {
+  //console.log(event.target);
+
+  const tab = event.target.closest(".tab-item");
+
+  tab.classList.remove("none-active");
+  tab.classList.add("active");
+
+  if (tab) {
+    const tabSiblings = findSiblings(tab);
+    tabSiblings.forEach((tabSibling) => {
+      tabSibling.classList.remove("active");
+      tabSibling.classList.add("none-active");
+    });
+    //console.log(tabSiblings);
+  }
+
+  //console.log(type);
+  //console.log(tab);
+});
 // confirmed: 71341
 // country: 4907
 // deaths: 1699
@@ -84,15 +108,9 @@ function getTableData(tableData) {
 //utils
 
 function findSiblings(node) {
-  const parent = node.parentElement
-  const children = parent.children
-  const childrenArray = Array.from(children)
-  const siblingsArray = childrenArray.filter(child => child !== node)
-  console.log(siblingsArray);
-  return siblingsArray
+  const parent = node.parentElement;
+  const children = parent.children;
+  const childrenArray = Array.from(children);
+  const siblingsArray = childrenArray.filter((child) => child !== node);
+  return siblingsArray;
 }
-
-
-
- 
-
