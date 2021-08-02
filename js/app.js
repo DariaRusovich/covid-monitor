@@ -1,14 +1,12 @@
-const tabs = document.getElementById('tabs')
+const tabs = document.getElementById("tabs");
 console.log(tabs);
-
-
 
 async function getResponse() {
   const response = await fetch(
     "https://api-covid19.rnbo.gov.ua/data?to=2021-07-23"
   );
   let data = await response.json();
-
+    
   console.log(data); //Object
 
   const confirmed = data.ukraine.map((key) => {
@@ -18,16 +16,28 @@ async function getResponse() {
   renderTableRow(createTableRow(data.ukraine), rowList);
 }
 
-tabs.addEventListener('click', event => {
+
+
+tabs.addEventListener("click", (event) => {
   //console.log(event.target);
-  const tab = event.target.closest('.tab-item')
+  const tab = event.target.closest(".tab-item");
+  tab.classList.remove('none-active')
+  tab.classList.add('active')
+ 
   if (tab) {
-    
+    const tabSiblings = findSiblings(tab)
+    tabSiblings.forEach(tabSibling => {
+      tabSibling.classList.remove('active')
+      tabSibling.classList.add('none-active')
+    })
+    //console.log(tabSiblings);
+   
   }
 
+  
+  //console.log(tab);
+});
 
-  console.log(tab);
-})
 
 
 const rowList = document.getElementById("rowList");
@@ -70,3 +80,19 @@ function getTableData(tableData) {
 
   `;
 }
+
+//utils
+
+function findSiblings(node) {
+  const parent = node.parentElement
+  const children = parent.children
+  const childrenArray = Array.from(children)
+  const siblingsArray = childrenArray.filter(child => child !== node)
+  console.log(siblingsArray);
+  return siblingsArray
+}
+
+
+
+ 
+

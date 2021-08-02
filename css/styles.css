@@ -212,6 +212,9 @@ button {
 .active {
   background-color: #292b33;
 }
+.none-active {
+  background-color: #24262e;
+}
 .totall-info {
   padding: 10px;
   display: flex;
