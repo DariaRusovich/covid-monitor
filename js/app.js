@@ -1,7 +1,7 @@
 const tabs = document.getElementById("tabs");
 console.log(tabs);
 const searchForm = document.getElementById("searchForm");
-
+const sortTable = document.getElementById('sortTable')
 
 
 
@@ -24,7 +24,30 @@ async function getResponse() {
   //console.log(confirmed);
 
 
-  renderTableRow(createTableRow(data.ukraine), rowList);
+  renderTableRow(createTableRow(dataUA), rowList);
+
+  sortTable.addEventListener('click', e => {
+    const th = e.target.closest('th')
+
+    if (th) {
+      th.dataset.order *= -1
+      const {key, order} = th.dataset;
+      console.log(order);
+      dataUA.sort((a, b) => {
+        //console.log(b[key]);
+       return (a[key] - (b[key])) * order;
+      })
+      renderTableRow(createTableRow(dataUA), rowList);
+    }
+
+  })
+  
+
+
+
+
+
+
 
   searchForm.addEventListener("input", function (e) {
     const query = this.search.value.trim().toLowerCase().split(' ').filter(word => !!word)
@@ -66,6 +89,7 @@ async function getResponse() {
         "https://api-covid19.rnbo.gov.ua/data?to=2021-07-23"
       );
       let data = await response.json();
+      
       renderTableRow(createTableRow(data.world), rowList);
     } 
     getResponse()
