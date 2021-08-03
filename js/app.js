@@ -1,11 +1,8 @@
 const tabs = document.getElementById("tabs");
 console.log(tabs);
 const searchForm = document.getElementById("searchForm");
-const sortTable = document.getElementById('sortTable')
-const sortRegion = document.getElementById('sortRegion')
-
-
-
+const sortTable = document.getElementById("sortTable");
+const sortRegion = document.getElementById("sortRegion");
 
 async function getResponse() {
   const response = await fetch(
@@ -13,8 +10,8 @@ async function getResponse() {
   );
   let data = await response.json();
   console.log(data);
-  let dataUA = data.ukraine
-  let dataWorld = data.world
+  let dataUA = data.ukraine;
+  let dataWorld = data.world;
   //let dataLabel = dataUA[0].label.en
   //console.log(dataLabel);
 
@@ -24,56 +21,50 @@ async function getResponse() {
   });
   //console.log(confirmed);
 
-
   renderTableRow(createTableRow(dataUA), rowList);
 
-  sortTable.addEventListener('click', e => {
-    const th = e.target.closest('th')
+  sortTable.addEventListener("click", (e) => {
+    const th = e.target.closest("th");
 
     if (th) {
-      th.dataset.order *= -1
-      const {key, order} = th.dataset;
+      th.dataset.order *= -1;
+      const { key, order } = th.dataset;
       console.log(order);
       dataUA.sort((a, b) => {
         //console.log(b[key]);
-       return (a[key] - (b[key])) * order;
-      })
+        return (a[key] - b[key]) * order;
+      });
       renderTableRow(createTableRow(dataUA), rowList);
     }
-   
-  })
-
-  
-
-
-
-
-
+  });
 
   searchForm.addEventListener("input", function (e) {
-    const query = this.search.value.trim().toLowerCase().split(' ').filter(word => !!word)
+    const query = this.search.value
+      .trim()
+      .toLowerCase()
+      .split(" ")
+      .filter((word) => !!word);
     console.log(query);
-    const searchField = ['en']
-    const filteredRegion = searchRegion(query, searchField, dataUA)
+    const searchField = ["en"];
+    const filteredRegion = searchRegion(query, searchField, dataUA);
     //console.log(searchRegion(query, searchField, dataUA));
-  })
+  });
 
   function searchRegion(query, field, data) {
-    const filteredRegion = data.filter(region =>{
-      return query.every(word => {
-        return field.some(field =>{
+    const filteredRegion = data.filter((region) => {
+      return query.every((word) => {
+        return field.some((field) => {
           return region[field]?.trim()?.toLowerCase()?.includes(word);
-        })
-      })
-    })
+        });
+      });
+    });
     //console.log(data);
-    return filteredRegion
-  
- }
+    return filteredRegion;
+  }
 
-  const tabUA = document.getElementById('tabUA')
-  const tabWorld = document.getElementById('tabWorld')
-  tabUA.addEventListener('click', e => {
+  const tabUA = document.getElementById("tabUA");
+  const tabWorld = document.getElementById("tabWorld");
+  tabUA.addEventListener("click", (e) => {
     async function getResponse() {
       const response = await fetch(
         "https://api-covid19.rnbo.gov.ua/data?to=2021-07-23"
@@ -81,21 +72,20 @@ async function getResponse() {
       let data = await response.json();
       renderTableRow(createTableRow(data.ukraine), rowList);
     }
-    
-    getResponse()
-  })
-  tabWorld.addEventListener('click', e => {
+
+    getResponse();
+  });
+  tabWorld.addEventListener("click", (e) => {
     async function getResponse() {
       const response = await fetch(
         "https://api-covid19.rnbo.gov.ua/data?to=2021-07-23"
       );
       let data = await response.json();
-      
+
       renderTableRow(createTableRow(data.world), rowList);
-    } 
-    getResponse()
-  })
-  
+    }
+    getResponse();
+  });
 }
 
 const rowList = document.getElementById("rowList");
@@ -148,13 +138,21 @@ function getTableData(tableData) {
   return ` <tr>
 <td class="region">${tableData.label.en}</td>
 <td class="confirmed"> ${tableData.confirmed} <br>
-<span>${tableData.delta_confirmed > 0 ? tableData.delta_confirmed  : "-"}</span> </td>
-<td class="deaths">${tableData.deaths } <br>
-<span>${tableData.delta_deaths  > 0 ? tableData.delta_deaths : "-"}</span></td>
+<span class="">${
+    tableData.delta_confirmed > 0 ? tableData.delta_confirmed : "-"
+  }</span> </td>
+<td class="deaths">${tableData.deaths} <br>
+<span class="">${
+    tableData.delta_deaths > 0 ? tableData.delta_deaths : "-"
+  }</span></td>
 <td class="recovered">${tableData.recovered} <br>
-<span>${tableData.delta_deaths  > 0 ? tableData.delta_recovered : "-"}</span></td>
+<span class=""> ${
+    tableData.delta_recovered > 0 ? tableData.delta_recovered : "-"
+  }</span></td>
 <td class="existing">${tableData.existing} <br>
-<span>${tableData.delta_deaths  > 0 ? tableData.delta_existing : "-"}</span></td></tr>
+<span class=""> ${
+    tableData.delta_existing > 0 ? tableData.delta_existing : "-"
+  }</span></td></tr>
 
   `;
 }

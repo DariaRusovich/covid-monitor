@@ -215,6 +215,14 @@ button {
 .none-active {
   background-color: #24262e;
 }
+.arrow::before{
+content: "\1F815";
+padding-right: 3px;
+}
+.arrow-down::before{
+  content: "\1F817";
+  padding-right: 3px;
+}
 .totall-info {
   padding: 10px;
   display: flex;
