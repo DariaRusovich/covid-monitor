@@ -1,21 +1,51 @@
 const tabs = document.getElementById("tabs");
 console.log(tabs);
+const searchForm = document.getElementById("searchForm");
+
+
+
+
+
 
 async function getResponse() {
   const response = await fetch(
     "https://api-covid19.rnbo.gov.ua/data?to=2021-07-23"
   );
   let data = await response.json();
-  console.log(data); //Object
+  let dataUA = data.ukraine
+  let dataLabel = dataUA[0].label.en
+  
+  console.log(dataLabel);
 
-
+  //Object
   const confirmed = data.ukraine.map((key) => {
     return key.confirmed;
   });
-  console.log(confirmed);
+  //console.log(confirmed);
 
 
   renderTableRow(createTableRow(data.ukraine), rowList);
+
+  searchForm.addEventListener("input", function (e) {
+    const query = this.search.value.trim().toLowerCase().split(' ').filter(word => !!word)
+    console.log(query);
+    const searchField = ['en']
+    const filteredRegion = searchRegion(query, searchField, dataUA)
+    //console.log(searchRegion(query, searchField, dataUA));
+  })
+
+  function searchRegion(query, field, data) {
+    const filteredRegion = data.filter(region =>{
+      return query.every(word => {
+        return field.some(field =>{
+          return region[field]?.trim()?.toLowerCase()?.includes(word);
+        })
+      })
+    })
+    //console.log(data);
+    return filteredRegion
+  
+ }
 
   const tabUA = document.getElementById('tabUA')
   const tabWorld = document.getElementById('tabWorld')
@@ -37,11 +67,10 @@ async function getResponse() {
       );
       let data = await response.json();
       renderTableRow(createTableRow(data.world), rowList);
-    }
-    
+    } 
     getResponse()
   })
- 
+  
 }
 
 const rowList = document.getElementById("rowList");
@@ -61,11 +90,7 @@ tabs.addEventListener("click", (event) => {
       tabSibling.classList.remove("active");
       tabSibling.classList.add("none-active");
     });
-    //console.log(tabSiblings);
   }
-
-  //console.log(type);
-  //console.log(tab);
 });
 // confirmed: 71341
 // country: 4907

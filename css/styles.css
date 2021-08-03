@@ -270,3 +270,6 @@ button {
 .data-info th, .data-table td{
   padding: 15px 0;
 }
+.data-table td{
+  width: 140px;
+}
