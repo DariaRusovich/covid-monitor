@@ -2,7 +2,7 @@ const tabs = document.getElementById("tabs");
 console.log(tabs);
 const searchForm = document.getElementById("searchForm");
 const sortTable = document.getElementById('sortTable')
-
+const sortRegion = document.getElementById('sortRegion')
 
 
 
@@ -12,10 +12,11 @@ async function getResponse() {
     "https://api-covid19.rnbo.gov.ua/data?to=2021-07-23"
   );
   let data = await response.json();
+  console.log(data);
   let dataUA = data.ukraine
-  let dataLabel = dataUA[0].label.en
-  
-  console.log(dataLabel);
+  let dataWorld = data.world
+  //let dataLabel = dataUA[0].label.en
+  //console.log(dataLabel);
 
   //Object
   const confirmed = data.ukraine.map((key) => {
@@ -39,10 +40,10 @@ async function getResponse() {
       })
       renderTableRow(createTableRow(dataUA), rowList);
     }
-
+   
   })
-  
 
+  
 
 
 
@@ -146,10 +147,14 @@ function renderTableRow(tableRowHtml, data) {
 function getTableData(tableData) {
   return ` <tr>
 <td class="region">${tableData.label.en}</td>
-<td class="confirmed"> ${tableData.confirmed} </td>
-<td class="deaths">${tableData.deaths}</td>
-<td class="recovered">${tableData.recovered}</td>
-<td class="existing">${tableData.existing}</td></tr>
+<td class="confirmed"> ${tableData.confirmed} <br>
+<span>${tableData.delta_confirmed > 0 ? tableData.delta_confirmed  : "-"}</span> </td>
+<td class="deaths">${tableData.deaths } <br>
+<span>${tableData.delta_deaths  > 0 ? tableData.delta_deaths : "-"}</span></td>
+<td class="recovered">${tableData.recovered} <br>
+<span>${tableData.delta_deaths  > 0 ? tableData.delta_recovered : "-"}</span></td>
+<td class="existing">${tableData.existing} <br>
+<span>${tableData.delta_deaths  > 0 ? tableData.delta_existing : "-"}</span></td></tr>
 
   `;
 }
