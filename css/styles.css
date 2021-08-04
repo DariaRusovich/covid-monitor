@@ -263,7 +263,6 @@ padding-right: 3px;
   padding: 8px 16px;
   background-color: #292b33;
   border: 1px solid #2e313a;
-  border-radius: 2px;
 }
 .table{
   width: 100%;
@@ -307,7 +306,7 @@ body.show-modal>.modal-backdrop{
     right: 0;
     left: 0;
     z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     visibility: hidden;
 }
@@ -315,11 +314,15 @@ body.show-modal>.modal-backdrop{
     padding: 30px;
     margin: auto;
     position: relative;
-    width: 50%;
-    display: flex;
-    justify-content: space-between;
-    background: #000;
+    width: 60%;
+    background: #24262e;
 
+}
+.modal-content{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid #2e313a;
 }
 .close-modal-btn{
   position: absolute;
@@ -327,4 +330,10 @@ body.show-modal>.modal-backdrop{
   top: 0;
   right: 0;
   padding: 0 10px; 
+}
+.modal-title{
+  font-size: 20px;
+  font-weight: 700;
+  padding-bottom: 10px;
+  
 }

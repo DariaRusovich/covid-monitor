@@ -259,7 +259,8 @@ function renderTableRow(tableRowHtml, data) {
 }
 
 function getTableData(tableData) {
-  return ` <tr class="rowListModal" data-id="${tableData.id}">
+  return ` 
+  <tr class="rowListModal" data-id="${tableData.id}">
 <td class="region">${tableData.label.en}</td>
 <td class="confirmed"> ${numFormatter.format(tableData.confirmed)} <br>
 <span class="${(tableData.delta_confirmed > 0) ? "arrow" : (tableData.delta_confirmed < 0) ? "arrow-down" : " "}">${
@@ -288,7 +289,8 @@ function createModalWindowHtml(modalData) {
 function createModalWindow(modalData) {
 
   return `
-  <h2>${modalData.label.en}</h2>
+  <h2 class="modal-title">${modalData.label.en}</h2>
+  <div class="modal-content">
   <div>
     <div>Confirmed:</div>
     <div class="info-item confirmed">
@@ -324,6 +326,7 @@ function createModalWindow(modalData) {
         (modalData.delta_existing > 0 || modalData.delta_existing < 0) ? numFormatter.format(modalData.delta_existing) : "-"
        }</span>
     </div>
+  </div>
   </div>
   <button class="close-modal-btn" id="closeModalBtn">&times;</button>
   `
