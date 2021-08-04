@@ -212,6 +212,17 @@ button {
 .active {
   background-color: #292b33;
 }
+.none-active {
+  background-color: #24262e;
+}
+.arrow::before{
+content: "\1F815";
+padding-right: 3px;
+}
+.arrow-down::before{
+  content: "\1F817";
+  padding-right: 3px;
+}
 .totall-info {
   padding: 10px;
   display: flex;
@@ -264,6 +275,12 @@ button {
 .data-info{
   text-align: left;
 }
+.row tr:hover{
+  background-color: #292b33;
+}
 .data-info th, .data-table td{
   padding: 15px 0;
+}
+.data-table td{
+  width: 140px;
 }
