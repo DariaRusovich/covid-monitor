@@ -292,3 +292,39 @@ padding-left: 3px;
   content: '\1F817';
   padding-left: 3px;
   }
+
+/* ========MODAL-WINDOW========== */
+body.show-modal{
+  overflow: hidden;
+}
+body.show-modal>.modal-backdrop{
+  visibility: visible;
+}
+  .modal-backdrop{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    visibility: hidden;
+}
+.modal-window{
+    padding: 30px;
+    margin: auto;
+    position: relative;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    background: #000;
+
+}
+.close-modal-btn{
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  padding: 0 10px; 
+}
