@@ -275,6 +275,9 @@ padding-right: 3px;
 .data-info{
   text-align: left;
 }
+.row tr:hover{
+  background-color: #292b33;
+}
 .data-info th, .data-table td{
   padding: 15px 0;
 }

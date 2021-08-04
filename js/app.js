@@ -138,20 +138,20 @@ function getTableData(tableData) {
   return ` <tr>
 <td class="region">${tableData.label.en}</td>
 <td class="confirmed"> ${tableData.confirmed} <br>
-<span class="">${
-    tableData.delta_confirmed > 0 ? tableData.delta_confirmed : "-"
+<span class="${(tableData.delta_confirmed > 0) ? "arrow" : (tableData.delta_confirmed < 0) ? "arrow-down" : " "}">${
+  (tableData.delta_confirmed > 0 || tableData.delta_confirmed < 0) ? tableData.delta_confirmed : "-"
   }</span> </td>
 <td class="deaths">${tableData.deaths} <br>
-<span class="">${
-    tableData.delta_deaths > 0 ? tableData.delta_deaths : "-"
+<span class="${(tableData.delta_deaths > 0) ? "arrow" : (tableData.delta_deaths < 0) ? "arrow-down" : " "}">${
+  (tableData.delta_deaths > 0 || tableData.delta_deaths < 0) ? tableData.delta_deaths : "-"
   }</span></td>
 <td class="recovered">${tableData.recovered} <br>
-<span class=""> ${
-    tableData.delta_recovered > 0 ? tableData.delta_recovered : "-"
+<span class="${(tableData.delta_recovered > 0) ? "arrow" : (tableData.delta_recovered < 0) ? "arrow-down" : " "}"> ${
+  (tableData.delta_recovered > 0 || tableData.delta_recovered < 0) ? tableData.delta_recovered : "-"
   }</span></td>
 <td class="existing">${tableData.existing} <br>
-<span class=""> ${
-    tableData.delta_existing > 0 ? tableData.delta_existing : "-"
+<span class="${(tableData.delta_existing > 0) ? "arrow" : (tableData.delta_existing < 0) ? "arrow-down" : " "}"> ${
+   (tableData.delta_existing > 0 || tableData.delta_existing < 0) ? tableData.delta_existing : "-"
   }</span></td></tr>
 
   `;
