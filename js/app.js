@@ -2,7 +2,9 @@ const tabs = document.getElementById("tabs");
 console.log(tabs);
 const searchForm = document.getElementById("searchForm");
 const sortTable = document.getElementById("sortTable");
-const sortRegion = document.getElementById("sortRegion");
+//const sortRegion = document.getElementById("sortRegion");
+const tableHeads = Array.from(sortTable.children)
+console.log(tableHeads);
 
 async function getResponse() {
   const response = await fetch(
@@ -25,7 +27,14 @@ async function getResponse() {
 
   sortTable.addEventListener("click", (e) => {
     const th = e.target.closest("th");
-
+    tableHeads.forEach(siblingTh =>{
+      if (siblingTh !== th) {
+        siblingTh.dataset.sorting = "false"
+      }
+      else {
+        siblingTh.dataset.sorting = "true"
+      }
+    })
     if (th) {
       th.dataset.order *= -1;
       const { key, order } = th.dataset;

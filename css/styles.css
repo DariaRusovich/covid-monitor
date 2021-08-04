@@ -284,3 +284,11 @@ padding-right: 3px;
 .data-table td{
   width: 140px;
 }
+[data-sorting="true"][data-order="1"]::after{
+content: '\1F815';
+padding-left: 3px;
+}
+[data-sorting="true"][data-order="-1"]::after{
+  content: '\1F817';
+  padding-left: 3px;
+  }
