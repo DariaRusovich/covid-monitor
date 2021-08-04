@@ -3,6 +3,8 @@ const tabs = document.getElementById("tabs");
 console.log(tabs);
 const searchForm = document.getElementById("searchForm");
 const sortTable = document.getElementById("sortTable");
+const totalNum = document.getElementById('totalNum')
+
 //const sortRegion = document.getElementById("sortRegion");
 const tableHeads = Array.from(sortTable.children)
 console.log(tableHeads);
@@ -15,14 +17,79 @@ async function getResponse() {
   console.log(data);
   let dataUA = data.ukraine;
   let dataWorld = data.world;
-  //let dataLabel = dataUA[0].label.en
-  //console.log(dataLabel);
-
-  //Object
-  const confirmed = data.ukraine.map((key) => {
+  
+  const confirmed = dataUA.map((key) => {
     return key.confirmed;
   });
-  //console.log(confirmed);
+  const confirmedWorld = dataWorld.map((key) => {
+    return key.confirmed
+  });
+  const worldNum = confirmedWorld.reduce((a,b) => a + b);
+  console.log(confirmed);
+  const deaths = dataUA.map((key) => {
+    return key.deaths;
+  });
+  const recovered = dataUA.map((key) => {
+    return key.recovered;
+  });
+  const existing = dataUA.map((key) => {
+    return key.existing;
+  });
+
+  const keys = [confirmed, deaths, recovered, existing].map(el => el.reduce((a,b) => a + b))
+  //console.log(keys[0]);
+  const total = [keys[0], worldNum]
+  console.log(total);
+  renderTotalNum(keys)
+  renderTotalCount(total)
+  function renderTotalNum(totalData) {
+  totalNum.innerHTML = `<div>
+  <div>Confirmed:</div>
+  <div class="info-item confirmed">
+    <span class="count">${totalData[0]}</span>
+    <span>1</span>
+  </div>
+  </div>
+  <div>
+  <div>Deaths:</div>
+  <div class="info-item deaths">
+    <span class="count">${totalData[1]}</span>
+    <span>2</span>
+  </div>
+</div>
+<div>
+  <div>Recovered:</div>
+  <div class="info-item recovered">
+    <span class="count">${totalData[2]}</span>
+    <span>4</span>
+  </div>
+</div>
+<div>
+  <div>Existing:</div>
+  <div class="info-item existing">
+    <span class="count">${totalData[3]}</span>
+    <span>5</span>
+  </div>
+</div>`
+  }
+
+  function renderTotalCount(data) {
+   tabs.innerHTML = ` <div class="tab-item active" id="tabUA">
+   <h2 class="title">Ukraine</h2>
+   <span>${data[0]}</span>
+ </div>
+ <div class="tab-item none-active" id="tabWorld">
+   <h2 class="title">World</h2>
+   <span>${data[1]}</span>
+ </div>`
+
+  }
+
+
+
+
+
+
 
   renderTableRow(createTableRow(dataUA), rowList);
 
@@ -71,7 +138,7 @@ async function getResponse() {
     //console.log(data);
     return filteredRegion;
   }
-
+  
   const tabUA = document.getElementById("tabUA");
   const tabWorld = document.getElementById("tabWorld");
   tabUA.addEventListener("click", (e) => {
@@ -96,6 +163,8 @@ async function getResponse() {
     }
     getResponse();
   });
+
+ 
 }
 
 const rowList = document.getElementById("rowList");
