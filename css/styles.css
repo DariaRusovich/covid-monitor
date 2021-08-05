@@ -175,6 +175,7 @@ button {
   max-width: 1000px;
   width: 100%;
   margin: 0 auto;
+  padding: 0 20px;
 }
 
 /*===========COMMON STYLES END============*/
@@ -203,6 +204,7 @@ button {
   font-size: 28px;
   padding: 10px;
   flex: 1;
+  background-color: #24262e;
 }
 .tab-item > span {
   color: #ffc538;
@@ -212,9 +214,7 @@ button {
 .active {
   background-color: #292b33;
 }
-.none-active {
-  background-color: #24262e;
-}
+
 .arrow::before{
 content: "\1F815";
 padding-right: 3px;
