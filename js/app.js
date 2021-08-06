@@ -1,7 +1,7 @@
 const tabs = document.getElementById("tabs");
 const searchForm = document.getElementById("searchForm");
 const sortTable = document.getElementById("sortTable");
-const totalNum = document.getElementById("totalNum");
+const totalNums = document.getElementById("totalNums");
 const tableHeads = Array.from(sortTable.children);
 const modalBackdrop = document.getElementById("modalBackdrop");
 const modalWindow = document.getElementById("modalWindow");
@@ -30,6 +30,7 @@ async function getDataByDate(date) {
   totals.ukraine = createTotals(DATA['ukraine'])
   Array.from(tabs.children).forEach(tab => {
     tab.lastElementChild.textContent = formatCount(totals[tab.dataset.placement].confirmed)
+    renderTotalNums(createTotals(DATA[dataPlacement]))
   })
 }
 
@@ -42,6 +43,41 @@ function createTotals(dataArray) {
     return acc
   }, { 'confirmed': 0, 'deaths': 0, 'recovered': 0, 'existing': 0, 'delta_confirmed': 0, 'delta_deaths': 0, 'delta_recovered': 0, 'delta_existing': 0 })
 }
+
+function renderTotalNums(total) {
+  console.log(total);
+  totalNums.innerHTML = `<div>
+<div>Confirmed:</div>
+<div class="info-item confirmed">
+  <span class="count">${formatCount(total.confirmed)}</span>
+  <span class="${getArrowClass(total.delta_confirmed)}">${formatCount(total.delta_confirmed)}</span>
+</div>
+</div>
+<div>
+<div>Deaths:</div>
+<div class="info-item deaths">
+  <span class="count">${formatCount(total.deaths)}</span>
+  <span class="${getArrowClass(total.delta_deaths)}">${formatCount(total.delta_deaths)}</span>
+</div>
+</div>
+<div>
+<div>Recovered:</div>
+<div class="info-item recovered">
+  <span class="count">${formatCount(total.recovered)}</span>
+  <span class="${getArrowClass(total.delta_recovered)}">${formatCount(total.delta_recovered)}</span>
+</div>
+</div>
+<div>
+<div>Existing:</div>
+<div class="info-item existing">
+  <span class="count">${formatCount(total.existing)}</span>
+  <span class="${getArrowClass(total.delta_existing)}">${formatCount(total.delta_existing)}</span>
+</div>
+</div>`
+}
+
+
+
 
 sortTable.addEventListener("click", (e) => {
   const th = e.target.closest("th");
@@ -86,6 +122,7 @@ tabs.addEventListener("click", (event) => {
   const tab = event.target.closest(".tab-item");
   if (tab) {
     dataPlacement = tab.dataset.placement;
+    renderTotalNums(createTotals(DATA[dataPlacement]))
     console.log(`totals for ${dataPlacement}`, createTotals(DATA[dataPlacement]));
     renderTableRows(createTableRows(DATA[dataPlacement]), rowList);
     tab.classList.add("active");
@@ -125,27 +162,36 @@ function createTableRow(rowData) {
       </tr>
   `;
 
-  function getArrowClass(value) {
-    return `${value > 0 ? " arrow" : value < 0 ? "arrow-down" : ""}`;
-  }
+  
+}
+
+function getArrowClass(value) {
+  return `${value > 0 ? " arrow" : value < 0 ? "arrow-down" : ""}`;
 }
 function formatCount(value) {
   return `${value === 0 ? "-" : numFormatter.format(value)}`;
 }
 function findSiblings(node) {
-  const parent = node.parentElement;
-  const children = parent.children;
-  const childrenArray = Array.from(children);
-  const siblingsArray = childrenArray.filter((child) => child !== node);
-  return siblingsArray;
+  return siblingsArray = Array.from(node.parentElement.children).filter((child) => child !== node)
 }
 
 
+  
 
 for (let i = 0; i < 5; i++) {
  console.log(i);;
   
 }
+
+function createGreeting(name) {
+  return function() {
+    console.log('Hello, ' + name)
+  }
+}
+
+let greeting = createGreeting('Ivan')
+greeting = createGreeting('Vasya')
+greeting()
 
 // async function getResponse() {
 
