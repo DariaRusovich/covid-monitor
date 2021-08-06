@@ -76,7 +76,7 @@ function renderTotalNums(total) {
 }
 
 document.addEventListener("click", (event) => {
-      const rowListModalEl = event.target.closest(".rowListModal")
+      const rowListModalEl = event.target.closest(".row-list-modal")
       const closeModalBtn = document.getElementById('closeModalBtn')
       if (rowListModalEl) {
         const rowListId = rowListModalEl.dataset.id
@@ -207,7 +207,7 @@ function createTableRows(dataArray) {
 }
 function createTableRow(rowData) {
   return ` 
-  <tr class="rowListModal" data-id="${rowData.id}">
+  <tr class="row-list-modal" data-id="${rowData.id}">
         <td class="region">${rowData.label[lang]}</td>
         <td class="confirmed"> ${formatCount(rowData.confirmed)} <br>
           <span class="${getArrowClass(rowData.delta_confirmed)}">${formatCount(rowData.delta_confirmed)}</span>
