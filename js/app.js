@@ -45,7 +45,6 @@ function createTotals(dataArray) {
 }
 
 function renderTotalNums(total) {
-  console.log(total);
   totalNums.innerHTML = `<div>
 <div>Confirmed:</div>
 <div class="info-item confirmed">
@@ -75,6 +74,69 @@ function renderTotalNums(total) {
 </div>
 </div>`
 }
+
+document.addEventListener("click", (event) => {
+      const rowListModalEl = event.target.closest(".rowListModal")
+      const closeModalBtn = document.getElementById('closeModalBtn')
+      if (rowListModalEl) {
+        const rowListId = rowListModalEl.dataset.id
+        const rowListData = DATA[dataPlacement].find(region => region.id === +rowListId)
+        createModalWindow(rowListData)
+        openModal()
+      }
+      else if (event.target === modalBackdrop || (event.target === closeModalBtn)) {
+        closeModal();
+      }
+    })
+    document.addEventListener("keyup", (event) => {
+      if (event.key === "Escape") {
+        closeModal();
+      }
+    });
+    function openModal() {
+        document.body.classList.add("show-modal");
+      }
+      function closeModal() {
+        document.body.classList.remove("show-modal");
+      }
+
+
+      function createModalWindow(modalData) {
+       modalWindow.innerHTML = `
+          <h2 class="modal-title">${modalData.label[lang]}</h2>
+          <div class="modal-content">
+          <div>
+            <div>Confirmed:</div>
+            <div class="info-item confirmed">
+              <span class="count">${formatCount(modalData.confirmed)}</span>
+              <span class="${getArrowClass(modalData.delta_confirmed)}">${formatCount(modalData.delta_confirmed)}</span>
+            </div>
+          </div>
+          <div>
+            <div>Deaths:</div>
+            <div class="info-item deaths">
+              <span class="count">${formatCount(modalData.deaths)}</span>
+              <span class="${getArrowClass(modalData.delta_deaths)}">${formatCount(modalData.delta_deaths)}</span>
+            </div>
+          </div>
+          <div>
+            <div>Recovered:</div>
+            <div class="info-item recovered">
+              <span class="count">${formatCount(modalData.recovered)}</span>
+              <span class="${getArrowClass(modalData.delta_recovered)}">${formatCount(modalData.delta_recovered)}</span>
+            </div>
+          </div>
+          <div>
+            <div>Existing:</div>
+            <div class="info-item existing">
+              <span class="count">${formatCount(modalData.existing)}</span>
+              <span class="${getArrowClass(modalData.delta_existing)}">${formatCount(modalData.delta_existing)}</span>
+            </div>
+          </div>
+          </div>
+          <button class="close-modal-btn" id="closeModalBtn">&times;</button>
+          `
+        }
 
 
 
@@ -178,20 +240,20 @@ function findSiblings(node) {
 
   
 
-for (let i = 0; i < 5; i++) {
- console.log(i);;
+// for (let i = 0; i < 5; i++) {
+//  console.log(i);;
   
-}
+// }
 
-function createGreeting(name) {
-  return function() {
-    console.log('Hello, ' + name)
-  }
-}
+// function createGreeting(name) {
+//   return function() {
+//     console.log('Hello, ' + name)
+//   }
+// }
 
-let greeting = createGreeting('Ivan')
-greeting = createGreeting('Vasya')
-greeting()
+// let greeting = createGreeting('Ivan')
+// greeting = createGreeting('Vasya')
+// greeting()
 
 // async function getResponse() {
 
